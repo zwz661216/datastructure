@@ -1,82 +1,72 @@
 import { Queue } from './interface'
 
 
-interface NodeProps<T> {
-    element: T
-    next?: NodeProps<T>
-}
+
 export default class CircularQueue<T> implements Queue<T> {
-    #maxLen: number
-    #head: NodeProps<T>
-    #tail: NodeProps<T>
-    #queue: Set<NodeProps<T>>
-    #length: number
+    #queue: T[]
+    #head: number
+    #tail: number
+    #size: number
     constructor(k: number) {
-        this.#maxLen = k
-        this.#queue = new Set()
-    
-        this.#length = 0
+        this.#queue = new Array(k)
+        this.#head = 0
+        this.#tail = -1
+        this.#size = 0
     }
+    /**入队 */
     public enQueue(element: T) {
-        if (this.#length === this.#maxLen) {
+        if (this.isFull()) {
             return false
         }
-        const node: NodeProps<T> = {
-            element,
-        }
-        node.next = node
-        if (this.isEmpty()) {
-            this.#head = node
-            this.#tail = node
-        } else {
-            this.#tail.next = node
-            this.#tail = node
-        }
-        this.#length ++
-        this.#queue.add(node)
+        this.#size ++
+        this.#tail = (this.#tail + 1) % this.#queue.length;
+        this.#queue[this.#tail] = element
         return true
     }
-
+    /**出队 */
     public deQueue() {
         if (this.isEmpty()) {
             return false
         }
-        const lastHead = this.#head
-        this.#queue.delete(lastHead)
-        this.#head = lastHead.next
-        this.#length --
+        if (this.#size === 0) {
+            this.#head = 0;
+            this.#tail = -1;
+            return true;
+        }
+        this.#size --
+        this.#head = (this.#head + 1) % this.#queue.length;
         return true
     }
-
+    /** 队列长度 */
+    public size() {
+        return this.#queue.length
+    }
+    /** 队列是否为空 */
+    public isEmpty() {
+        return this.#size === 0
+    }
+    public isFull() {
+        return this.#size === this.#queue.length
+    }
+    /** 取出首项 */
     public Front() {
         if (this.isEmpty()) {
             return -1
         }
-        return this.#head.element
+        return this.#queue[this.#head]
     }
-
+    /** 取出尾项 */
     public Rear() {
         if (this.isEmpty()) {
             return -1
         }
-        return this.#tail.element
-    }
-
-    public isEmpty() {
-        return this.#length === 0
-    }
-
-    public isFull() {
-        return this.#length === this.#maxLen
-    }
-    public size() {
-        return this.#length
+        return this.#queue[this.#tail]
     }
     public clear() {
-        this.#head = null
-        this.#tail = null
-        this.#length = 0
-        this.#queue.clear();
+        this.#queue = []
+        this.#size = 0
+        this.#head = 0;
+        this.#tail = -1;
     }
 }
 

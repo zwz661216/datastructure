@@ -1,31 +1,30 @@
-import {Queue} from './interface'
-interface NodeProps<T>{
-    element: T
-    next?: NodeProps<T>
-}
+import {Queue,NodeProps} from './interface'
 /**
  * 链表队列
  */
-export default class LinkedQueue<T> implements Queue<T>{
+ export  default class LinkedSizeQueue<T> implements Queue<T> {
+    #maxLen: number
     #head: NodeProps<T>
-    #tail:  NodeProps<T>
+    #tail: NodeProps<T>
     #queue: Set<NodeProps<T>>
-    #length:number
-    // #forEachIndex:NodeProps<T>
-    constructor() {
+    #length: number
+    constructor(k: number) {
+        this.#maxLen = k
         this.#queue = new Set()
+    
         this.#length = 0
-         
     }
     public enQueue(element: T) {
-        const node:NodeProps<T> = {
+        if (this.#length === this.#maxLen) {
+            return false
+        }
+        const node: NodeProps<T> = {
             element,
         }
         node.next = node
         if (this.isEmpty()) {
             this.#head = node
             this.#tail = node
-            // this.#forEachIndex  = node
         } else {
             this.#tail.next = node
             this.#tail = node
@@ -34,6 +33,7 @@ export default class LinkedQueue<T> implements Queue<T>{
         this.#queue.add(node)
         return true
     }
+
     public deQueue() {
         if (this.isEmpty()) {
             return false
@@ -41,26 +41,34 @@ export default class LinkedQueue<T> implements Queue<T>{
         const lastHead = this.#head
         this.#queue.delete(lastHead)
         this.#head = lastHead.next
-        // this.#forEachIndex  = lastHead.next
         this.#length --
         return true
     }
-    public size() {
-        return this.#length
-    }
-    /** 队列是否为空 */
-    public isEmpty() {
-        return this.#length === 0
-    }
 
-    /** 取出首项 */
     public Front() {
         if (this.isEmpty()) {
-            return null
+            return -1
         }
         return this.#head.element
     }
 
+    public Rear() {
+        if (this.isEmpty()) {
+            return -1
+        }
+        return this.#tail.element
+    }
+
+    public isEmpty() {
+        return this.#length === 0
+    }
+
+    public isFull() {
+        return this.#length === this.#maxLen
+    }
+    public size() {
+        return this.#length
+    }
     public clear() {
         this.#head = null
         this.#tail = null
@@ -69,3 +77,71 @@ export default class LinkedQueue<T> implements Queue<T>{
     }
 }
 
+/**
+ * 链表队列
+ */
+ export class LinkedQueue<T> implements Queue<T> {
+    #head: NodeProps<T>
+    #tail: NodeProps<T>
+    #queue: Set<NodeProps<T>>
+    #length: number
+    constructor() {
+        this.#queue = new Set()
+        this.#length = 0
+    }
+    public enQueue(element: T) {
+        const node: NodeProps<T> = {
+            element,
+        }
+        node.next = node
+        if (this.isEmpty()) {
+            this.#head = node
+            this.#tail = node
+        } else {
+            this.#tail.next = node
+            this.#tail = node
+        }
+        this.#length ++
+        this.#queue.add(node)
+        return true
+    }
+
+    public deQueue() {
+        if (this.isEmpty()) {
+            return false
+        }
+        const lastHead = this.#head
+        this.#queue.delete(lastHead)
+        this.#head = lastHead.next
+        this.#length --
+        return true
+    }
+
+    public Front() {
+        if (this.isEmpty()) {
+            return -1
+        }
+        return this.#head.element
+    }
+
+    public Rear() {
+        if (this.isEmpty()) {
+            return -1
+        }
+        return this.#tail.element
+    }
+
+    public isEmpty() {
+        return this.#length === 0
+    }
+ 
+    public size() {
+        return this.#length
+    }
+    public clear() {
+        this.#head = null
+        this.#tail = null
+        this.#length = 0
+        this.#queue.clear();
+    }
+}

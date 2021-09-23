@@ -12,3 +12,7 @@ export abstract class Queue<T> {
     abstract Front(): -1 | T;
     abstract clear(): void
 }
+export interface NodeProps<T> {
+    element: T
+    next?: NodeProps<T>
+}
