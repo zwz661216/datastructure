@@ -1,7 +1,7 @@
 import ArrayQueue from './queue/array'
 import LinkedQueue from './queue/list'
 import CircularQueue from './queue/circular'
-
+import './queue/bfs'
 // const queue = new ArrayQueue()
 // queue.enQueue(1)
 // queue.enQueue(2)
@@ -83,19 +83,19 @@ import CircularQueue from './queue/circular'
 //  debugger
 // const params = [ [6], [], [], [], [5], [], [], [], [], [], []];
 
-const params = [[69],[],[92],[12],[],[],[],[],[],[28],[],[13],[45],[],[],[],[24],[27],[],[],[],[],[],[],[88],[],[],[],[],[],[],[53],[39],[],[28],[66],[17],[],[],[47],[],[87],[],[92],[94],[],[59],[],[],[99],[],[],[84],[],[],[],[52],[],[],[86],[30],[],[],[],[],[],[],[45],[],[],[83],[],[],[],[22],[77],[23],[],[],[],[14],[],[],[90],[57],[],[],[],[],[34],[],[],[],[],[],[],[],[49],[59],[],[71]]
-const keys =  ["enQueue","deQueue","enQueue","enQueue","deQueue","isFull","isFull","Front","deQueue","enQueue","Front","enQueue","enQueue","Rear","Rear","deQueue","enQueue","enQueue","Rear","Rear","Front","Rear","Rear","deQueue","enQueue","Rear","deQueue","Rear","Rear","Front","Front","enQueue","enQueue","Front","enQueue","enQueue","enQueue","Front","isEmpty","enQueue","Rear","enQueue","Front","enQueue","enQueue","Front","enQueue","deQueue","deQueue","enQueue","deQueue","Front","enQueue","Rear","isEmpty","Front","enQueue","Front","deQueue","enQueue","enQueue","deQueue","deQueue","Front","Front","deQueue","isEmpty","enQueue","Rear","Front","enQueue","isEmpty","Front","Front","enQueue","enQueue","enQueue","Rear","Front","Front","enQueue","isEmpty","deQueue","enQueue","enQueue","Rear","deQueue","Rear","Front","enQueue","deQueue","Rear","Front","Rear","deQueue","Rear","Rear","enQueue","enQueue","Rear","enQueue"]
+// const params = [[69],[],[92],[12],[],[],[],[],[],[28],[],[13],[45],[],[],[],[24],[27],[],[],[],[],[],[],[88],[],[],[],[],[],[],[53],[39],[],[28],[66],[17],[],[],[47],[],[87],[],[92],[94],[],[59],[],[],[99],[],[],[84],[],[],[],[52],[],[],[86],[30],[],[],[],[],[],[],[45],[],[],[83],[],[],[],[22],[77],[23],[],[],[],[14],[],[],[90],[57],[],[],[],[],[34],[],[],[],[],[],[],[],[49],[59],[],[71]]
+// const keys =  ["enQueue","deQueue","enQueue","enQueue","deQueue","isFull","isFull","Front","deQueue","enQueue","Front","enQueue","enQueue","Rear","Rear","deQueue","enQueue","enQueue","Rear","Rear","Front","Rear","Rear","deQueue","enQueue","Rear","deQueue","Rear","Rear","Front","Front","enQueue","enQueue","Front","enQueue","enQueue","enQueue","Front","isEmpty","enQueue","Rear","enQueue","Front","enQueue","enQueue","Front","enQueue","deQueue","deQueue","enQueue","deQueue","Front","enQueue","Rear","isEmpty","Front","enQueue","Front","deQueue","enQueue","enQueue","deQueue","deQueue","Front","Front","deQueue","isEmpty","enQueue","Rear","Front","enQueue","isEmpty","Front","Front","enQueue","enQueue","enQueue","Rear","Front","Front","enQueue","isEmpty","deQueue","enQueue","enQueue","Rear","deQueue","Rear","Front","enQueue","deQueue","Rear","Front","Rear","deQueue","Rear","Rear","enQueue","enQueue","Rear","enQueue"]
 
-const  circularQueue = new CircularQueue(81);
-// [true,6,6,true,true,5,true,5,true,true,true]
-// [true,6,6,true,true,5,true,-1,false,false,false]
-keys.forEach((item,index) => {
+// const  circularQueue = new CircularQueue(81);
+// // [true,6,6,true,true,5,true,5,true,true,true]
+// // [true,6,6,true,true,5,true,-1,false,false,false]
+// keys.forEach((item,index) => {
    
-    const circularQueueParams = params[index]
-    const cb = circularQueue[item].apply(circularQueue,circularQueueParams)
+//     const circularQueueParams = params[index]
+//     const cb = circularQueue[item].apply(circularQueue,circularQueueParams)
     
-    console.log( 'item = ',item, ', params =', ...circularQueueParams ,' , value = ',cb)
-})
+//     console.log( 'item = ',item, ', params =', ...circularQueueParams ,' , value = ',cb)
+// })
 
 
 
