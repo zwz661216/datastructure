@@ -40,6 +40,7 @@ function BFS(root: BFSProps) {
     queue.enQueue(root)
     let size = queue.size()
     const set = new Set()
+    let step = 0;
     set.add(root)
     while (size > 0) {
         const item = queue.Front()
@@ -57,7 +58,8 @@ function BFS(root: BFSProps) {
         }
         queue.deQueue()
         size = queue.size()
-            
+        step ++ 
     }
+    return step
 }
 BFS(root)

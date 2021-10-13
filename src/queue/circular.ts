@@ -2,6 +2,9 @@ import { Queue } from './interface'
 
 
 
+/**
+ * 数组队列-循环队列
+ */
 export default class CircularQueue<T> implements Queue<T> {
     #queue: T[]
     #head: number

@@ -1,6 +1,6 @@
 import {Queue,NodeProps} from './interface'
 /**
- * 链表队列
+ * 链表队列 有限空间
  */
  export  default class LinkedSizeQueue<T> implements Queue<T> {
     #maxLen: number
@@ -78,7 +78,7 @@ import {Queue,NodeProps} from './interface'
 }
 
 /**
- * 链表队列
+ * 链表队列 无限空间
  */
  export class LinkedQueue<T> implements Queue<T> {
     #head: NodeProps<T>
